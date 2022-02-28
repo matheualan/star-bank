@@ -1,17 +1,17 @@
 package br.com.starbank.controller;
 
+import br.com.starbank.dto.ClientDTO;
 import br.com.starbank.model.ClientModel;
 import br.com.starbank.repository.ClientRepository;
 import br.com.starbank.util.DateUtil;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
+import javax.validation.Valid;
 
 @Log4j2
 @RestController
@@ -27,10 +27,15 @@ public class ClientController {
     }
 
     @PostMapping
-    public ResponseEntity<ClientModel> insertClient(@RequestBody ClientModel clientModel) {
-        log.info(dateUtil.dateFormatted(LocalDateTime.now()).concat(" /POST - insertClient"));
-        ClientModel client = clientRepository.save(clientModel);
-        return ResponseEntity.status(HttpStatus.CREATED).body(client);
+    public ResponseEntity<ClientModel> inserirClinte(@RequestBody @Valid ClientDTO clientDTO) {
+
     }
+
+//    @PostMapping
+//    public ResponseEntity<ClientModel> insertClient(@RequestBody ClientModel clientModel) {
+//        log.info(dateUtil.dateFormatted(LocalDateTime.now()).concat(" /POST - insertClient"));
+//        ClientModel client = clientRepository.save(clientModel);
+//        return ResponseEntity.status(HttpStatus.CREATED).body(client);
+//    }
 
 }
