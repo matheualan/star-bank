@@ -1,8 +1,11 @@
 package br.com.starbank.util;
 
+import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@Service
 public class DateUtil {
 
     public String dateFormatted(LocalDateTime localDateTime) {

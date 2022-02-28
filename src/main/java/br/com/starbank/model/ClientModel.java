@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,7 +21,7 @@ public class ClientModel {
     private String cpf;
     private String rg;
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDateTime birthDate;
+    private Date birthDate;
     private String nationality;
     private String uf;
 //    private List<AccountModel> accountType;
@@ -69,11 +70,11 @@ public class ClientModel {
         this.rg = rg;
     }
 
-    public LocalDateTime getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDateTime birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
