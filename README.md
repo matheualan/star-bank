@@ -10,10 +10,10 @@ Técnologias Utilizadas:
 
 Dependências:
 * Spring Web
-* DevTools
-* Driver MySQL
+* Spring Boot DevTools
+* Spring Data JPA
+* MySQL Driver
 * H2 Database
-* Spring JPA
 * Lombok
 
 Documentação:
