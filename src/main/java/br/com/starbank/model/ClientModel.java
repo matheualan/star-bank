@@ -1,8 +1,11 @@
 package br.com.starbank.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -16,9 +19,12 @@ public class ClientModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_client")
     private UUID id;
+    @Column()
     private String cardHolder; //titular do cartão
     private String mothersName;
+    @Column(unique = true)
     private String cpf;
+    @Column(unique = true)
     private String rg;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date birthDate;
