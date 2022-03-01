@@ -19,7 +19,7 @@ public class ClientModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_client")
     private UUID id;
-    @Column()
+    @Column
     private String cardHolder; //titular do cartão
     private String mothersName;
     @Column(unique = true)
