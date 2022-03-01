@@ -14,6 +14,7 @@ Dependências:
 * Spring Data JPA
 * MySQL Driver
 * H2 Database
+* Validation
 * Lombok
 
 Documentação:
