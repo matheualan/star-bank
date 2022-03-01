@@ -9,14 +9,13 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Optional;
+import java.util.UUID;
 
 @Log4j2
 @RestController
@@ -40,6 +39,13 @@ public class ClientController {
         BeanUtils.copyProperties(clientDTO, clientModel);
         clientModel.setEntryDate(LocalDateTime.now());
         return ResponseEntity.status(HttpStatus.CREATED).body(clientService.save(clientModel));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ClientModel> findById(@PathVariable UUID id) {
+        log.info(dateUtil.dateFormatted(LocalDateTime.now()).concat(" /GET findById"));
+        Optional<ClientModel> clientModelOptional = clientService.getById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(clientModelOptional.get());
     }
 
 
