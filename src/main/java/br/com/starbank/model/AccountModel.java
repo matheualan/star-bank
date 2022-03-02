@@ -17,6 +17,7 @@ public class AccountModel {
 //    private ClientModel client;
     private String accountNumber;
     private String agencyNumber;
+    private String accountType;
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime createdDate;
 
