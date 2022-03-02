@@ -21,13 +21,12 @@ public class ClientService implements ClientServiceInterface {
         this.clientRepository = clientRepository;
     }
 
-    @Override
-    public Optional<ClientModel> getById(UUID id) {
+    public Optional<ClientModel> findById(UUID id) {
         return clientRepository.findById(id);
     }
 
     @Override
-    public Page<ClientModel> getAll(Pageable pageable) {
+    public Page<ClientModel> findAll(Pageable pageable) {
         return clientRepository.findAll(pageable);
     }
 
@@ -37,6 +36,7 @@ public class ClientService implements ClientServiceInterface {
         return clientRepository.save(clientModel);
     }
 
+    @Transactional
     @Override
     public void deleteById(UUID id) {
         clientRepository.deleteById(id);

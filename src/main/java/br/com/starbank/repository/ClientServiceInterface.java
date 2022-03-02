@@ -11,8 +11,8 @@ import java.util.UUID;
 public interface ClientServiceInterface {
 
     ClientModel save(ClientModel clientModel);
-    Page<ClientModel> getAll(Pageable pageable);
-    Optional<ClientModel> getById(UUID id);
+    Page<ClientModel> findAll(Pageable pageable);
+    Optional<ClientModel> findById(UUID id);
     void deleteById(UUID id);
 
 }
