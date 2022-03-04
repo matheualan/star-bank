@@ -6,6 +6,7 @@ import br.com.starbank.repository.AccountServiceInterface;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -29,11 +30,13 @@ public class AccountService implements AccountServiceInterface {
         return accountRepository.findById(id);
     }
 
+    @Transactional
     @Override
     public AccountModel save(AccountModel accountModel) {
         return accountRepository.save(accountModel);
     }
 
+    @Transactional
     @Override
     public void deleteById(UUID id) {
         accountRepository.deleteById(id);
