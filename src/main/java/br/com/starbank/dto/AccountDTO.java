@@ -1,7 +1,10 @@
 package br.com.starbank.dto;
 
+import org.springframework.stereotype.Service;
+
 import javax.validation.constraints.NotBlank;
 
+@Service
 public class AccountDTO {
 
     @NotBlank
