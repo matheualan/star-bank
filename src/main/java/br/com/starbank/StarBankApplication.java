@@ -2,9 +2,10 @@ package br.com.starbank;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@EnableSwagger2
+//@EnableSwagger2
+@EnableFeignClients
 @SpringBootApplication
 public class StarBankApplication {
 

@@ -1,4 +1,4 @@
-package br.com.starbank.service;
+package br.com.starbank.service.implement;
 
 import br.com.starbank.model.ClientModel;
 import br.com.starbank.repository.ClientRepository;

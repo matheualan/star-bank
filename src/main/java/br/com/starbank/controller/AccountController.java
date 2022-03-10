@@ -4,7 +4,6 @@ import br.com.starbank.dto.AccountDTO;
 import br.com.starbank.model.AccountModel;
 import br.com.starbank.service.AccountService;
 import br.com.starbank.util.DateUtil;
-import io.swagger.annotations.Api;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
@@ -19,7 +18,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
-@Api
+//@Api
 @Log4j2
 @RestController
 @RequestMapping(path = "/account")

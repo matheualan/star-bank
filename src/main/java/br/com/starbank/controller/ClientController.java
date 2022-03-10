@@ -2,10 +2,8 @@ package br.com.starbank.controller;
 
 import br.com.starbank.dto.ClientDTO;
 import br.com.starbank.model.ClientModel;
-import br.com.starbank.service.ClientService;
+import br.com.starbank.service.implement.ClientService;
 import br.com.starbank.util.DateUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
@@ -21,7 +19,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
-@Api
+//@Api
 @Log4j2
 @RestController
 @RequestMapping("/client")
@@ -37,7 +35,7 @@ public class ClientController {
         this.clientDTO = clientDTO;
     }
 
-    @ApiOperation("Cadastrar um cliente por vez.")
+//    @ApiOperation("Cadastrar um cliente por vez.")
     @PostMapping
     public ResponseEntity<ClientModel> inserirCliente(@RequestBody @Valid ClientDTO clientDTO) {
         log.info(dateUtil.dateFormatted(LocalDateTime.now()).concat(" /POST inserirCliente"));
@@ -47,7 +45,7 @@ public class ClientController {
         return ResponseEntity.status(HttpStatus.CREATED).body(clientService.save(clientModel));
     }
 
-    @ApiOperation("Buscar cliente por ID.")
+//    @ApiOperation("Buscar cliente por ID.")
     @GetMapping("/{id}")
     public ResponseEntity<ClientModel> findById(@PathVariable UUID id) {
         log.info(dateUtil.dateFormatted(LocalDateTime.now()).concat(" /GET findById"));
@@ -55,7 +53,7 @@ public class ClientController {
         return ResponseEntity.status(HttpStatus.OK).body(clientModelOptional.get());
     }
 
-    @ApiOperation("Listar todos clientes.")
+//    @ApiOperation("Listar todos clientes.")
     @GetMapping
     public ResponseEntity<Page<ClientModel>> findAll(@PageableDefault(page = 0, size = 2, sort = "id",
                                                     direction = Sort.Direction.ASC) Pageable pageable) {
@@ -64,7 +62,7 @@ public class ClientController {
         return ResponseEntity.status(HttpStatus.OK).body(findAll);
     }
 
-    @ApiOperation("Deletar cliente por ID.")
+//    @ApiOperation("Deletar cliente por ID.")
     @DeleteMapping("/{id}")
     public ResponseEntity<Optional<ClientModel>> deleteById(@PathVariable(value = "id") UUID id) {
         log.info(dateUtil.dateFormatted(LocalDateTime.now()).concat(" /DELETE deleteById"));
@@ -72,7 +70,7 @@ public class ClientController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @ApiOperation("Atualizar cliente por ID.")
+//    @ApiOperation("Atualizar cliente por ID.")
     @PutMapping("/{id}")
     public ResponseEntity<ClientModel> update(@RequestBody ClientDTO clientDTO, @PathVariable(value = "id") UUID id) {
         log.info(dateUtil.dateFormatted(LocalDateTime.now()).concat(" /PUT update"));

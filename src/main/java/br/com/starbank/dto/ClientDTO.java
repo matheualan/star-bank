@@ -1,7 +1,9 @@
 package br.com.starbank.dto;
 
+import br.com.starbank.model.AddressModel;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -22,14 +24,15 @@ public class ClientDTO {
     private String rg;
 //    @NotBlank
 //    @JsonFormat(pattern = "dd/MM/yyyy")
-//    private Date birthDate;
+//    private LocalDateTime birthDate;
     @NotBlank
     private String nationality;
     @NotBlank //Fazer teste se usando Size precisa ter o NotBlank
-    @Size(min = 2, max = 2, message = "O campo 'UF' deve conter 2 caracteres.")
+    @Size(min = 2, max = 2, message = "O campo 'UF' deve conter 2 caracteres. Ex: SP")
     private String uf;
+    @NotBlank
+    private AddressModel address;
 //    private List<AccountModel> accountType;
-//    private List<AddressModel> address;
 //    private List<ContactModel> contact;
 
     public String getCardHolder() {
@@ -88,27 +91,11 @@ public class ClientDTO {
         this.uf = uf;
     }
 
-//    public List<AccountModel> getAccountType() {
-//        return accountType;
-//    }
-//
-//    public void setAccountType(List<AccountModel> accountType) {
-//        this.accountType = accountType;
-//    }
-//
-//    public List<AddressModel> getAddress() {
-//        return address;
-//    }
-//
-//    public void setAddress(List<AddressModel> address) {
-//        this.address = address;
-//    }
-//
-//    public List<ContactModel> getContact() {
-//        return contact;
-//    }
-//
-//    public void setContact(List<ContactModel> contact) {
-//        this.contact = contact;
-//    }
+    public AddressModel getAddress() {
+        return address;
+    }
+
+    public void setAddress(AddressModel address) {
+        this.address = address;
+    }
 }
