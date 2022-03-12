@@ -20,22 +20,25 @@ public class ClientModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_client")
     private UUID id;
+
     @Column(nullable = false)
     private String cardHolder; //titular do cartão
     private String mothersName;
+
     @Column(nullable = false, unique = true)
     private String cpf;
+
     @Column(nullable = false, unique = true)
     private String rg;
+
     @Column(nullable = false)
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthDate;
-    private String nationality;
-    private String uf;
+
+    @JoinColumn(name = "endereco_ID")
     @ManyToOne
     private AddressModel address;
-//    private List<AccountModel> accountType;
-//    private List<ContactModel> contact;
+
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime entryDate;
 
@@ -85,22 +88,6 @@ public class ClientModel {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
-    }
-
-    public String getNationality() {
-        return nationality;
-    }
-
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
-    }
-
-    public String getUf() {
-        return uf;
-    }
-
-    public void setUf(String uf) {
-        this.uf = uf;
     }
 
     public AddressModel getAddress() {

@@ -3,6 +3,7 @@ package br.com.starbank.controller;
 import br.com.starbank.dto.ClientDTO;
 import br.com.starbank.model.ClientModel;
 import br.com.starbank.service.implement.ClientService;
+import br.com.starbank.service.implement.ClientServiceTest;
 import br.com.starbank.util.DateUtil;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
@@ -28,14 +29,16 @@ public class ClientController {
     private final DateUtil dateUtil;
     private final ClientService clientService;
     private final ClientDTO clientDTO;
+    private final ClientServiceTest clientServiceTest;
 
-    public ClientController(DateUtil dateUtil, ClientService clientService, ClientDTO clientDTO) {
+    public ClientController(DateUtil dateUtil, ClientService clientService, ClientDTO clientDTO, ClientServiceTest clientServiceTest) {
         this.dateUtil = dateUtil;
         this.clientService = clientService;
         this.clientDTO = clientDTO;
+        this.clientServiceTest = clientServiceTest;
     }
 
-//    @ApiOperation("Cadastrar um cliente por vez.")
+    //    @ApiOperation("Cadastrar um cliente por vez.")
     @PostMapping
     public ResponseEntity<ClientModel> inserirCliente(@RequestBody @Valid ClientDTO clientDTO) {
         log.info(dateUtil.dateFormatted(LocalDateTime.now()).concat(" /POST inserirCliente"));
@@ -45,41 +48,53 @@ public class ClientController {
         return ResponseEntity.status(HttpStatus.CREATED).body(clientService.save(clientModel));
     }
 
-//    @ApiOperation("Buscar cliente por ID.")
+    //    @ApiOperation("Buscar cliente por ID.")
     @GetMapping("/{id}")
     public ResponseEntity<ClientModel> findById(@PathVariable UUID id) {
         log.info(dateUtil.dateFormatted(LocalDateTime.now()).concat(" /GET findById"));
-        Optional<ClientModel> clientModelOptional = clientService.findById(id);
+        Optional<ClientModel> clientModelOptional = clientServiceTest.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(clientModelOptional.get());
     }
 
-//    @ApiOperation("Listar todos clientes.")
+    //    @ApiOperation("Listar todos clientes.")
     @GetMapping
     public ResponseEntity<Page<ClientModel>> findAll(@PageableDefault(page = 0, size = 2, sort = "id",
-                                                    direction = Sort.Direction.ASC) Pageable pageable) {
+            direction = Sort.Direction.ASC) Pageable pageable) {
         log.info(dateUtil.dateFormatted(LocalDateTime.now()).concat(" /GET findAll"));
-        Page<ClientModel> findAll = clientService.findAll(pageable);
+        Page<ClientModel> findAll = clientServiceTest.findAll(pageable);
         return ResponseEntity.status(HttpStatus.OK).body(findAll);
     }
 
-//    @ApiOperation("Deletar cliente por ID.")
+    //    @ApiOperation("Deletar cliente por ID.")
     @DeleteMapping("/{id}")
     public ResponseEntity<Optional<ClientModel>> deleteById(@PathVariable(value = "id") UUID id) {
         log.info(dateUtil.dateFormatted(LocalDateTime.now()).concat(" /DELETE deleteById"));
-        clientService.deleteById(id);
+        clientServiceTest.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 //    @ApiOperation("Atualizar cliente por ID.")
+//    @PutMapping("/{id}")
+//    public ResponseEntity<ClientModel> update(@RequestBody ClientDTO clientDTO, @PathVariable(value = "id") UUID id) {
+//        log.info(dateUtil.dateFormatted(LocalDateTime.now()).concat(" /PUT update"));
+//        Optional<ClientModel> clientModelOptional = clientServiceTest.findById(id);
+//        var clientModel = new ClientModel();
+//        clientModel.setId(clientModelOptional.get().getId());
+//        clientModel.setEntryDate(clientModelOptional.get().getEntryDate());
+//        BeanUtils.copyProperties(clientDTO, clientModel); //Conferir se nesta posição depois de settar Id funcionar
+//        return ResponseEntity.status(HttpStatus.CREATED).body(clientService.save(clientModel));
+//    }
+
     @PutMapping("/{id}")
     public ResponseEntity<ClientModel> update(@RequestBody ClientDTO clientDTO, @PathVariable(value = "id") UUID id) {
         log.info(dateUtil.dateFormatted(LocalDateTime.now()).concat(" /PUT update"));
-        Optional<ClientModel> clientModelOptional = clientService.findById(id);
+        Optional<ClientModel> clientModelOptional = clientServiceTest.findById(id);
         var clientModel = new ClientModel();
+        BeanUtils.copyProperties(clientDTO, clientModel); //Conferir se nesta posição depois de settar Id funcionar
         clientModel.setId(clientModelOptional.get().getId());
         clientModel.setEntryDate(clientModelOptional.get().getEntryDate());
-        BeanUtils.copyProperties(clientDTO, clientModel); //Conferir se nesta posição depois de settar Id funcionar
-        return ResponseEntity.status(HttpStatus.CREATED).body(clientService.save(clientModel));
+        clientServiceTest.update(id, clientModel);
+        return ResponseEntity.status(HttpStatus.CREATED).body(clientModel);
     }
 
 }

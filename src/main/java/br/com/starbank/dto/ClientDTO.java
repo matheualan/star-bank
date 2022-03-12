@@ -11,29 +11,27 @@ import javax.validation.constraints.Size;
 public class ClientDTO {
 
     @NotBlank
-    @Size(min = 7, max = 255)
+    @Size(min = 3, max = 255)
     private String cardHolder;
+
     @NotBlank
-    @Size(min = 7, max = 255)
+    @Size(min = 3, max = 255)
     private String mothersName;
+
     @NotBlank
     @Size(min = 11, max = 14)
     private String cpf;
+
     @NotBlank
     @Size(min = 7, max = 9)
     private String rg;
+
 //    @NotBlank
 //    @JsonFormat(pattern = "dd/MM/yyyy")
 //    private LocalDateTime birthDate;
-    @NotBlank
-    private String nationality;
-    @NotBlank //Fazer teste se usando Size precisa ter o NotBlank
-    @Size(min = 2, max = 2, message = "O campo 'UF' deve conter 2 caracteres. Ex: SP")
-    private String uf;
-    @NotBlank
+
+    @Valid
     private AddressModel address;
-//    private List<AccountModel> accountType;
-//    private List<ContactModel> contact;
 
     public String getCardHolder() {
         return cardHolder;
@@ -74,22 +72,6 @@ public class ClientDTO {
 //    public void setBirthDate(Date birthDate) {
 //        this.birthDate = birthDate;
 //    }
-
-    public String getNationality() {
-        return nationality;
-    }
-
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
-    }
-
-    public String getUf() {
-        return uf;
-    }
-
-    public void setUf(String uf) {
-        this.uf = uf;
-    }
 
     public AddressModel getAddress() {
         return address;
