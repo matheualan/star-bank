@@ -2,15 +2,21 @@ package br.com.starbank.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.cloud.openfeign.FeignClient;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
+/**
+ * orphanRemoval=true para remover os objetos atrelados quando remover um objeto
+ */
 
 @Entity
 @Table(name = "tb_clients")
@@ -23,6 +29,7 @@ public class ClientModel {
 
     @Column(nullable = false)
     private String cardHolder; //titular do cartão
+
     private String mothersName;
 
     @Column(nullable = false, unique = true)
@@ -31,13 +38,12 @@ public class ClientModel {
     @Column(nullable = false, unique = true)
     private String rg;
 
-    @Column(nullable = false)
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthDate;
 
-    @JoinColumn(name = "endereco_ID")
-    @ManyToOne
-    private AddressModel address;
+//    @ManyToOne
+//    @JoinColumn(name = "address")
+//    private AddressModel address;
 
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime entryDate;
@@ -90,13 +96,13 @@ public class ClientModel {
         this.birthDate = birthDate;
     }
 
-    public AddressModel getAddress() {
-        return address;
-    }
-
-    public void setAddress(AddressModel address) {
-        this.address = address;
-    }
+//    public AddressModel getAddress() {
+//        return address;
+//    }
+//
+//    public void setAddress(AddressModel address) {
+//        this.address = address;
+//    }
 
     public LocalDateTime getEntryDate() {
         return entryDate;
@@ -105,4 +111,6 @@ public class ClientModel {
     public void setEntryDate(LocalDateTime entryDate) {
         this.entryDate = entryDate;
     }
+
+
 }

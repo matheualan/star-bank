@@ -30,8 +30,8 @@ public class ClientDTO {
 //    @JsonFormat(pattern = "dd/MM/yyyy")
 //    private LocalDateTime birthDate;
 
-    @Valid
-    private AddressModel address;
+//    @Valid
+//    private AddressModel address;
 
     public String getCardHolder() {
         return cardHolder;
@@ -73,11 +73,11 @@ public class ClientDTO {
 //        this.birthDate = birthDate;
 //    }
 
-    public AddressModel getAddress() {
-        return address;
-    }
-
-    public void setAddress(AddressModel address) {
-        this.address = address;
-    }
+//    public AddressModel getAddress() {
+//        return address;
+//    }
+//
+//    public void setAddress(AddressModel address) {
+//        this.address = address;
+//    }
 }

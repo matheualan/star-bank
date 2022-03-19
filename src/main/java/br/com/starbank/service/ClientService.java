@@ -1,12 +1,12 @@
-package br.com.starbank.service.implement;
+package br.com.starbank.service;
 
 import br.com.starbank.model.ClientModel;
 import br.com.starbank.repository.ClientRepository;
 import br.com.starbank.repository.ClientServiceInterface;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -14,14 +14,12 @@ import java.util.UUID;
 @Service
 public class ClientService implements ClientServiceInterface {
 
-    private final ClientRepository clientRepository;
+    @Autowired
+    private ClientRepository clientRepository;
 
-    public ClientService(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
-    }
-
-    public Optional<ClientModel> findById(UUID id) {
-        return clientRepository.findById(id);
+    @Override
+    public ClientModel save(ClientModel clientModel) {
+        return clientRepository.save(clientModel);
     }
 
     @Override
@@ -29,13 +27,11 @@ public class ClientService implements ClientServiceInterface {
         return clientRepository.findAll(pageable);
     }
 
-    @Transactional
     @Override
-    public ClientModel save(ClientModel clientModel) {
-        return clientRepository.save(clientModel);
+    public Optional<ClientModel> findById(UUID id) {
+        return clientRepository.findById(id);
     }
 
-    @Transactional
     @Override
     public void deleteById(UUID id) {
         clientRepository.deleteById(id);

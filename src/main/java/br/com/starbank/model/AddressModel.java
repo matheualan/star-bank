@@ -1,21 +1,32 @@
 package br.com.starbank.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Cascade;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_enderecos")
 public class AddressModel {
 
     @Id
+    @Column()
     private String cep;
     private String logradouro;
     private String complemento;
     private String bairro;
     private String localidade;
+//    @Column(length = 2)
     private String uf;
+//    @Column(length = 2)
     private String ddd;
+
+//    @JsonIgnore
+//    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "address")
+//    private List<ClientModel> clientModel = new ArrayList<>();
 
     public String getCep() {
         return cep;
@@ -72,4 +83,12 @@ public class AddressModel {
     public void setDdd(String ddd) {
         this.ddd = ddd;
     }
+
+//    public List<ClientModel> getClientModel() {
+//        return clientModel;
+//    }
+//
+//    public void setClientModel(List<ClientModel> clientModel) {
+//        this.clientModel = clientModel;
+//    }
 }
