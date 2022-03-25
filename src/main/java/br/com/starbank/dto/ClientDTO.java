@@ -1,9 +1,7 @@
 package br.com.starbank.dto;
 
-import br.com.starbank.model.AddressModel;
 import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
