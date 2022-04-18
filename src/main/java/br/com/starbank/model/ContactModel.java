@@ -1,6 +1,10 @@
 package br.com.starbank.model;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -11,10 +15,14 @@ public class ContactModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_contact")
     private UUID id;
+    @Column(nullable = false)
     private String name;
-    @Column(length = 20)
-    private String cellPhone;
+    @Column(length = 20, nullable = false)
+    private List<String> cellPhone;
+    @Column(unique = true, nullable = false)
     private String emailAddress;
+    @CreationTimestamp
+    private LocalDateTime creatAt;
 
     public UUID getId() {
         return id;
@@ -28,11 +36,11 @@ public class ContactModel {
         this.name = name;
     }
 
-    public String getCellPhone() {
+    public List<String> getCellPhone() {
         return cellPhone;
     }
 
-    public void setCellPhone(String cellPhone) {
+    public void setCellPhone(List<String> cellPhone) {
         this.cellPhone = cellPhone;
     }
 
@@ -42,5 +50,17 @@ public class ContactModel {
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getCreatAt() {
+        return creatAt;
+    }
+
+    public void setCreatAt(LocalDateTime creatAt) {
+        this.creatAt = creatAt;
     }
 }
