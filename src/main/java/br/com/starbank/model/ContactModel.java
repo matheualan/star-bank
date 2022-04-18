@@ -18,6 +18,7 @@ public class ContactModel {
     @Column(nullable = false)
     private String name;
     @Column(length = 20, nullable = false)
+    @ElementCollection
     private List<String> cellPhone;
     @Column(unique = true, nullable = false)
     private String emailAddress;
